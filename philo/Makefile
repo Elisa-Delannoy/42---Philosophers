@@ -3,7 +3,7 @@ NAME = philo
 CC = cc -pthread -g
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c utils.c
+SRC = main.c utils.c routine.c check.c
 
 SRCDIR = sources
 OBJDIR = obj
