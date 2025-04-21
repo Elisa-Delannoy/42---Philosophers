@@ -8,12 +8,23 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+typedef enum e_condition
+{
+	ONLY_ONE_PHILO,
+	TAKE_FORK,
+	EATING,
+	SLEEPING,
+	THINKING,
+	DIED
+}	t_condition;
+
 typedef struct s_philo
 {
-	int					id;	
-	pthread_mutex_t		left_fork;
-	pthread_mutex_t		right_fork;
-	int					last_meal;
+	int					id;
+	size_t				last_meal;
+	int					total_meal;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*right_fork;
 	pthread_t			threads;
 	size_t				t_init_action;
 	struct s_var		*var;
@@ -23,20 +34,16 @@ typedef struct s_philo
 typedef struct s_var
 {
 	int				nb_philo;
-	int				t_die;
+	int				nb_meal;
+	int				check_dead;
+	size_t			t_die;
 	size_t			t_eat;
 	size_t			t_sleep;
-	int				nb_eat;
-	// size_t			t_init_action;
+	pthread_mutex_t	print;
+	pthread_mutex_t	dead;
 	pthread_mutex_t	*fork;
 	t_philo			*philo;
 }	t_var;
-
-// typedef struct s_timeval
-// {
-// 	time_t		tv_sec;
-// 	suseconds_t	tv_usec;
-// }	t_timeval;
 
 int	ft_atoi(const char *nptr);
 

@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:36:43 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/16 13:51:26 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/18 12:06:21 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,16 @@ int	ft_atoi(const char *nptr)
 	}
 	return (nb * m);
 }
+
+// void	ft_sleep_and_think(t_philo philo)
+// {
+// 	philo.t_init_action = ft_get_time();
+	
+// 	printf("%lu %d is sleeping\n", ft_get_time(), philo.id);
+// 	// while (ft_get_time() - philo.t_init_action <= philo.var->t_sleep)
+// 	usleep(philo.var->t_sleep * 1000);
+// 	// if (ft_get_time() - philo.t_init_action > philo.var->t_sleep)
+// 	// {
+// 	printf("%lu %d is thinking\n", ft_get_time(), philo.id);
+// 	// }
+// }
