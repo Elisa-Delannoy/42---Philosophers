@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:06:18 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 11:29:20 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:09:29 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_init_action_philo_and_fork(t_var *var)
 		var->philo[i].right_fork = &var->fork[i];
 		var->philo[i].left_fork = &var->fork[(i + 1) % var->nb_philo];
 		var->philo[i].total_meal = 0;
-		var->philo[i].last_meal = ft_get_time() - var->time_init;
+		var->philo[i].last_meal = ft_get_time();
 		var->philo[i].var = var;
 		if (pthread_mutex_init(&var->fork[i], NULL) != 0)
 			return ;
@@ -68,7 +68,8 @@ int	ft_init_action(char **argv, t_var *var)
 		return (1);
 	if (pthread_mutex_init(&var->print, NULL) != 0
 		|| pthread_mutex_init(&var->dead, NULL) != 0
-		|| pthread_mutex_init(&var->meal, NULL))
+		|| pthread_mutex_init(&var->meal, NULL)
+		|| pthread_mutex_init(&var->time, NULL) != 0)
 		return (1);
 	var->fork = malloc (var->nb_philo * sizeof(pthread_mutex_t));
 	var->philo = malloc(var->nb_philo * sizeof(t_philo));
@@ -100,6 +101,7 @@ int	main(int argc, char **argv)
 {
 	t_var	var;
 	int		i;
+	int		temp;
 
 	i = 0;
 	if (argc < 5 || argc > 6)
@@ -108,7 +110,10 @@ int	main(int argc, char **argv)
 		return (1);
 	while (1)
 	{
-		if (var.nb_meal != -1 && var.philo[i].total_meal >= var.nb_meal)
+		// pthread_mutex_lock(&var.meal);
+		// temp = var.philo[i].total_meal;
+		// pthread_mutex_unlock(&var.meal);
+		if (var.nb_meal != -1 && temp >= var.nb_meal)
 		{
 			if (ft_check_nb_meal(&var) == 1)
 				break ;
@@ -118,8 +123,8 @@ int	main(int argc, char **argv)
 			ft_check_to_print(var.philo, DIED);
 			break ;
 		}
-		i++;
-		if (i % var.nb_philo == 0)
+		// i++;
+		if (++i % var.nb_philo == 0)
 			i = 0;
 	}
 	return (ft_wait_philosophers(var), ft_quit_clean(&var), 0);

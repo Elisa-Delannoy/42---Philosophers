@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:40:06 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 11:21:20 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:34:07 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef struct s_var
 	int				t_eat;
 	int				t_sleep;
 	long int		time_init;
-	long int		delta_time_init;
+	// long int		delta_time_init;
+	pthread_mutex_t	time;
 	pthread_mutex_t	print;
 	pthread_mutex_t	meal;
 	pthread_mutex_t	dead;
@@ -67,5 +68,6 @@ int				ft_check_nb_meal(t_var *var);
 int				ft_check_to_print(t_philo *philo, int c);
 void			ft_dead_in_main(t_var *var);
 long int		ft_get_time(void);
+void			sleep_ms(int duration);
 
 #endif

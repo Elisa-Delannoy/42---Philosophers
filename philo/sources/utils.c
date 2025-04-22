@@ -6,11 +6,20 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:36:43 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 10:55:47 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:12:47 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	sleep_ms(int duration)
+{
+	long	start;
+
+	start = ft_get_time();
+	while (ft_get_time() < start + duration)
+		usleep(500);
+}
 
 long int	ft_get_time(void)
 {
