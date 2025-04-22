@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:45:19 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/21 17:25:33 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:29:39 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_eat(t_philo *philo)
 {
 	ft_check_to_print(philo, EATING);
 	usleep(philo->var->t_eat * 1000);
-	philo->last_meal = ft_get_time();
 	pthread_mutex_lock(&philo->var->meal);
+	philo->last_meal = ft_get_time() - philo->var->time_init;
 	philo->total_meal++;
 	pthread_mutex_unlock(&philo->var->meal);
 	pthread_mutex_unlock(philo->left_fork);

@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:40:06 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/21 17:23:52 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:21:20 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_var
 	int				t_die;
 	int				t_eat;
 	int				t_sleep;
+	long int		time_init;
+	long int		delta_time_init;
 	pthread_mutex_t	print;
 	pthread_mutex_t	meal;
 	pthread_mutex_t	dead;

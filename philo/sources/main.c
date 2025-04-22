@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:06:18 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/21 17:26:48 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:29:20 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_init_action_philo_and_fork(t_var *var)
 		var->philo[i].right_fork = &var->fork[i];
 		var->philo[i].left_fork = &var->fork[(i + 1) % var->nb_philo];
 		var->philo[i].total_meal = 0;
-		var->philo[i].last_meal = ft_get_time();
+		var->philo[i].last_meal = ft_get_time() - var->time_init;
 		var->philo[i].var = var;
 		if (pthread_mutex_init(&var->fork[i], NULL) != 0)
 			return ;
@@ -73,10 +73,8 @@ int	ft_init_action(char **argv, t_var *var)
 	var->fork = malloc (var->nb_philo * sizeof(pthread_mutex_t));
 	var->philo = malloc(var->nb_philo * sizeof(t_philo));
 	if (!var->fork || !var->philo)
-	{
-		var->nb_philo = -1;
-		return (free(var->fork), free(var->philo), 1);
-	}
+		return (var->nb_philo = -1, free(var->fork), free(var->philo), 1);
+	var->time_init = ft_get_time();
 	ft_init_action_philo_and_fork(var);
 	return (0);
 }
@@ -117,7 +115,7 @@ int	main(int argc, char **argv)
 		}
 		if (ft_check_philo_is_dead(&var.philo[i]) == 0)
 		{
-			ft_dead_in_main(&var);
+			ft_check_to_print(var.philo, DIED);
 			break ;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:36:43 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/21 16:49:44 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:55:47 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ long int	ft_get_time(void)
 {
 	struct timeval	tv;
 	long int		time_ms;
-
+	
 	gettimeofday(&tv, NULL);
 	time_ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time_ms);
