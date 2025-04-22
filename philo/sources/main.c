@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:06:18 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 15:09:29 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:47:00 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int	ft_init_action(char **argv, t_var *var)
 		return (1);
 	if (pthread_mutex_init(&var->print, NULL) != 0
 		|| pthread_mutex_init(&var->dead, NULL) != 0
-		|| pthread_mutex_init(&var->meal, NULL)
-		|| pthread_mutex_init(&var->time, NULL) != 0)
+		|| pthread_mutex_init(&var->meal, NULL))
 		return (1);
 	var->fork = malloc (var->nb_philo * sizeof(pthread_mutex_t));
 	var->philo = malloc(var->nb_philo * sizeof(t_philo));
@@ -101,7 +100,6 @@ int	main(int argc, char **argv)
 {
 	t_var	var;
 	int		i;
-	int		temp;
 
 	i = 0;
 	if (argc < 5 || argc > 6)
@@ -110,22 +108,10 @@ int	main(int argc, char **argv)
 		return (1);
 	while (1)
 	{
-		// pthread_mutex_lock(&var.meal);
-		// temp = var.philo[i].total_meal;
-		// pthread_mutex_unlock(&var.meal);
-		if (var.nb_meal != -1 && temp >= var.nb_meal)
-		{
-			if (ft_check_nb_meal(&var) == 1)
-				break ;
-		}
-		if (ft_check_philo_is_dead(&var.philo[i]) == 0)
-		{
-			ft_check_to_print(var.philo, DIED);
-			break ;
-		}
-		// i++;
-		if (++i % var.nb_philo == 0)
-			i = 0;
+		if (ft_check_continue(&var) != 0)
+			break;
 	}
-	return (ft_wait_philosophers(var), ft_quit_clean(&var), 0);
+	ft_wait_philosophers(var);
+	ft_quit_clean(&var);
+	return (0);
 }

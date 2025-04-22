@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:36:43 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 14:12:47 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:16:47 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sleep_ms(int duration)
 {
-	long	start;
+	long int	start;
 
 	start = ft_get_time();
 	while (ft_get_time() < start + duration)
