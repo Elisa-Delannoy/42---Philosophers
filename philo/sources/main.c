@@ -6,20 +6,20 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:06:18 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 15:47:00 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:57:47 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	ft_wait_philosophers(t_var var)
+void	ft_wait_philosophers(t_var *var)
 {
 	int	i;
 
 	i = 0;
-	while (i < var.nb_philo)
+	while (i < var->nb_philo)
 	{
-		if (pthread_join(var.philo[i].threads, NULL) != 0)
+		if (pthread_join(var->philo[i].threads, NULL) != 0)
 			return ;
 		i++;
 	}
@@ -68,7 +68,7 @@ int	ft_init_action(char **argv, t_var *var)
 		return (1);
 	if (pthread_mutex_init(&var->print, NULL) != 0
 		|| pthread_mutex_init(&var->dead, NULL) != 0
-		|| pthread_mutex_init(&var->meal, NULL))
+		|| pthread_mutex_init(&var->meal, NULL) != 0)
 		return (1);
 	var->fork = malloc (var->nb_philo * sizeof(pthread_mutex_t));
 	var->philo = malloc(var->nb_philo * sizeof(t_philo));
@@ -106,12 +106,14 @@ int	main(int argc, char **argv)
 		return (write(2, ERROR1, 59), write(2, ERROR2, 51), 1);
 	if (ft_init_action(argv, &var) == 1)
 		return (1);
+	if (var.philo->id % 2 == 0)
+		ft_sleep_ms(2);
 	while (1)
 	{
 		if (ft_check_continue(&var) != 0)
-			break;
+			break ;
 	}
-	ft_wait_philosophers(var);
+	ft_wait_philosophers(&var);
 	ft_quit_clean(&var);
 	return (0);
 }

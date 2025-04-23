@@ -6,18 +6,18 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:36:43 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 16:16:47 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/23 10:29:37 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	sleep_ms(int duration)
+void	ft_sleep_ms(int sleeping_time)
 {
 	long int	start;
 
 	start = ft_get_time();
-	while (ft_get_time() < start + duration)
+	while (ft_get_time() < start + sleeping_time)
 		usleep(500);
 }
 
@@ -25,7 +25,7 @@ long int	ft_get_time(void)
 {
 	struct timeval	tv;
 	long int		time_ms;
-	
+
 	gettimeofday(&tv, NULL);
 	time_ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time_ms);

@@ -6,7 +6,7 @@
 /*   By: edelanno <edelanno@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:40:06 by edelanno          #+#    #+#             */
-/*   Updated: 2025/04/22 16:17:07 by edelanno         ###   ########.fr       */
+/*   Updated: 2025/04/23 10:30:34 by edelanno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ typedef struct s_var
 	int				nb_philo;
 	int				nb_meal;
 	int				check_dead;
-	long int		t_die;
-	long int		t_eat;
-	long int		t_sleep;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
 	long int		time_init;
 	pthread_mutex_t	print;
 	pthread_mutex_t	meal;
@@ -59,11 +59,11 @@ typedef struct s_var
 	t_philo			*philo;
 }	t_var;
 
-int		ft_atoi(const char *nptr);
-void			*ft_routine(void *arg);
-int				ft_check_to_print(t_philo *philo, int c);
-long int		ft_get_time(void);
-void			sleep_ms(int duration);
-int				ft_check_continue(t_var *var);
+int			ft_atoi(const char *nptr);
+void		*ft_routine(void *arg);
+int			ft_check_to_print(t_philo *philo, int c);
+long int	ft_get_time(void);
+int			ft_check_continue(t_var *var);
+void		ft_sleep_ms(int sleeping_time);
 
 #endif
